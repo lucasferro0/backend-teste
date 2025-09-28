@@ -53,7 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single'], // Configuraria no channel stack para ficar com o channel daily que tem rotação de logs e colocaria mais algum channel como por exemplo algum com driver do elastic search ou slack
             'ignore_exceptions' => false,
         ],
 

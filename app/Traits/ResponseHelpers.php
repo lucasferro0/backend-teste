@@ -5,6 +5,11 @@ namespace App\Traits;
 use Illuminate\Http\JsonResponse;
 use App\Http\Responses\DefaultResponse;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Nenhum método dessa trait está sendo usado
+ */
 trait ResponseHelpers
 {
     /**

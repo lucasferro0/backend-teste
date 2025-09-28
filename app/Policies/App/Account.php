@@ -4,6 +4,16 @@ namespace App\Policies\App;
 
 use App\Policies\BasePolicy;
 
+/**
+ * [ANÁLISE]
+ *
+ * - As policies não seguiram as laravel conventions
+ *
+ * - Houve um conflito entre policy pattern e domain pattern no projeto
+ *   É ideal escolher um pattern apenas e utilizá-lo mantendo o padrão.
+ *
+ * - O diretório App dentro de Policies não tem sentido, visto que não agrega em nada na contextualização da arquitetura do projeto.
+ */
 class Account extends BasePolicy
 {
     /**

@@ -7,6 +7,12 @@ use App\Http\Responses\InternalError;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Não é necessário ter classes de responses. O laravel já nos fornece os chamados JsonResource e ResourceCollection para isso.
+ *   Claramente há aqui uma mistura de responsabilidade. Tratamento de response body deve ser feito no resource json.
+ */
 class DefaultResponse
 {
     /**

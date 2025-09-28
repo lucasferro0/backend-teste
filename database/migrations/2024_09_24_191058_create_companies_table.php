@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
+     /**
+     * [ANÁLISE]
+     * - Dependendo do SGBD não é interessante usar uuid como pk, pois pode ter problema de performance.
+     *   Usar integer vai ser mais rápido, porque uuid é string.
      */
     public function up()
     {

@@ -77,8 +77,15 @@ class CreateFirstUser extends BaseUseCase
      */
     protected function validateUser(): CreateUserDomain
     {
+        /**
+         * [ANÁLISE]
+         *
+         * Vemos aqui um possível erro de efeito colateral futuramente,
+         * basta eu alterar a ordem de execução dos métodos dentro do método handle que isso pode ter um erro.
+         * O id da company poderia ser recebido por argumento no método validateUser()
+         */
         return (new CreateUserDomain(
-            $this->company['id'],
+            $this->company['id'], // Vemos aqui um possível erro de efeito colateral futuramente, basta eu alterar a ordem de execução dos métodos dentro do método handle que isso pode ter um erro
             $this->params->userName,
             $this->params->userDocumentNumber,
             $this->params->email,

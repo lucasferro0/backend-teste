@@ -16,7 +16,7 @@ class RegisterTest extends TestCase
     public function testRegisterWithSuccess()
     {
         $body = [
-            'user_document_number'    => app(Person::class)->cpf(false),
+            'user_document_number'    => app(Person::class)->cpf(false), // Só precisaba mudar o locale para pt_BR e poderia utilizar o helper global fake(), ou acessar a variável $this->faker
             'user_name'               => $this->faker->name,
             'company_document_number' => app(Company::class)->cnpj(false),
             'company_name'            => $this->faker->company,

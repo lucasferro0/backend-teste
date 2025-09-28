@@ -7,16 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * [ANÁLISE]
      *
-     * @return void
+     * - Caso realizasse a mudança da pk de user para integer, teria que mudar aqui também.
+     *   Dessa forma poderia substituir $table->string('tokenable_type'); e $table->uuid('tokenable_id'); por um ->nullableMorphs('tokenable', 'idx_tokenable');
      */
     public function up()
     {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
             $table->string('tokenable_type');
-            $table->uuid('tokenable_id');
+            $table->uuid('tokenable_id'); // Caso realizasse a mudança da pk de user para integer, teria que mudar aqui também. Dessa forma poderia substituir $table->string('tokenable_type'); e $table->uuid('tokenable_id'); por um ->nullableMorphs('tokenable')
             $table->string('name');
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();

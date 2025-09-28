@@ -22,7 +22,7 @@ class Show extends BaseUseCase
      */
     protected array $company;
 
-    public function __construct(string $id)
+    public function __construct(string $id) // Poderia usar property promotion nesse caso e em outros diversos casos de outras classes
     {
         $this->id = $id;
     }

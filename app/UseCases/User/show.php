@@ -6,33 +6,33 @@ use Throwable;
 use App\UseCases\BaseUseCase;
 use App\Repositories\User\Find;
 
-class show extends BaseUseCase
+class show extends BaseUseCase // Nome de classe fora do padrão da PSR12
 {
     /**
      * Id do usuário
      *
      * @var string
      */
-    protected string $a;
+    protected string $a; // Péssima prática utilizar variável desse jeito.
 
     /**
      * Id da empresa
      *
      * @var string
      */
-    protected string $b;
+    protected string $b; // mesma coisa
 
     /**
      * Usuário
      *
      * @var array|null
      */
-    protected ?array $c;
+    protected ?array $c; // mesma coisa
 
-    public function __construct(string $a, string $b)
+    public function __construct(string $a, string $b) // mesma coisa
     {
-        $this->a = $a;
-        $this->b = $b;
+        $this->a = $a; // mesma coisa
+        $this->b = $b; // mesma coisa
     }
 
     /**
@@ -42,7 +42,7 @@ class show extends BaseUseCase
      */
     protected function find(): void
     {
-        $this->c = (new Find($this->a, $this->b))->handle();
+        $this->c = (new Find($this->a, $this->b))->handle(); // mesma coisa
     }
 
     /**
@@ -62,6 +62,6 @@ class show extends BaseUseCase
             );
         }
 
-        return $this->c;
+        return $this->c; // mesma coisa
     }
 }

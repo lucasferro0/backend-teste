@@ -49,15 +49,15 @@ trait Logger
         string $description,
         string $action,
         $value,
-        Throwable $error = null,
-        string $idUser = null,
-        string $idCompany = null,
-        string $entityId = null,
-        string $entity = null,
-        string $logLevel = 'DEBUG',
-        string $logType = 'SERVER',
-        Carbon $requestDatetime = null,
-        Carbon $responseDatetime = null
+        Throwable $error = null, // Atribuindo valor null para um argumento que só pode ter o tipo Throwable
+        string $idUser = null, // Mesma coisa
+        string $idCompany = null, // Mesma coisa
+        string $entityId = null, // Mesma coisa
+        string $entity = null, // Mesma coisa
+        string $logLevel = 'DEBUG', // Mesma coisa
+        string $logType = 'SERVER', // Mesma coisa
+        Carbon $requestDatetime = null, // Mesma coisa
+        Carbon $responseDatetime = null // Mesma coisa
     ): array {
         try {
             $value    = is_array($value) ? $value : [$value];
@@ -69,6 +69,12 @@ trait Logger
                 $value    = array_merge($value, compact('errorLog'));
             }
 
+            /**
+             * [ANÁLISE]
+             *
+             * - O método $this->getUserFromJwt() não existe em lugar nenhum do projeto
+             *   Dessa forma, causará um erro ao tentar gravar o log.
+             */
             $getUserResponse = $this->getUserFromJwt();
             $requestDuration = null;
 
@@ -77,6 +83,12 @@ trait Logger
                     / Carbon::MICROSECONDS_PER_MILLISECOND;
             }
 
+            /**
+             * [ANÁLISE]
+             *
+             * - Há dados repetidos, como por exemplo a url
+             *
+             */
             $context = [
                 'description'                   => $description,
                 'action'                        => $action,
@@ -84,8 +96,8 @@ trait Logger
                 'entity'                        => mb_strtoupper($entity),
                 'log_type'                      => mb_strtoupper($logType),
                 'log_level'                     => $logLevel,
-                'user_id'                       => $idUser ?: data_get($getUserResponse, 'user_id'),
-                'company_id'                    => $idCompany ?: data_get($getUserResponse, 'company_id'),
+                'user_id'                       => $idUser ?: data_get($getUserResponse, 'user_id'), // Se o id já está na variável $idUser, por que tentar pegar do array $getUserResponse ?
+                'company_id'                    => $idCompany ?: data_get($getUserResponse, 'company_id'), // Mesma coisa da linha de cima
                 'admin_user_id'                 => data_get($getUserResponse, 'admin_user_id'),
                 'value'                         => $value,
                 'uuid'                          => $uuid,
@@ -103,14 +115,30 @@ trait Logger
                 ],
             ];
 
+            /**
+             * [ANÁLISE]
+             *
+             * - O canal utilizado para esse log não existe no arquivo logging.php
+             */
             Log::channel('log_service')->{$logLevel}($context['description'], $context);
         } catch (Throwable $e) {
+            /**
+             * [ANÁLISE]
+             *
+             * - Esses returns não estão sendo usados
+             */
             return [
                 'success' => false,
                 'message' => 'Falha ao enviar Log',
                 'data'    => $e,
             ];
         }
+
+        /**
+         * [ANÁLISE]
+         *
+         * - Esses returns não estão sendo usados
+         */
 
         return [
             'success' => true,
@@ -134,8 +162,8 @@ trait Logger
     public function defaultErrorHandling(
         Throwable $exception,
         $data = null,
-        string $idEntity = null,
-        string $entity = null,
+        string $idEntity = null, // Valor default null para argumento do tipo string
+        string $entity = null, // Valor default null para argumento do tipo string
         string $level = 'ERROR'
     ): void {
         // Caso seja um erro esperado BaseException, continua sem criar log
@@ -163,7 +191,19 @@ trait Logger
             $level
         );
 
+        /**
+         * [ANÁLISE]
+         *
+         * - Foi deixado esse dump() no código, isso é um erro e pode ser uma vulnerabilidade.
+         */
         dump($exception);
+
+        /**
+         * [ANÁLISE]
+         *
+         * - Esse comentário abaixo já descreve a falta de confiabilidade nessa estrutura de log.
+         *   Lança uma exception para evitar log duplicado.
+         */
 
         // Para evitar propagação de log duplicado, o erro é propagado como
         // BaseException

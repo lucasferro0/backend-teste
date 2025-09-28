@@ -26,6 +26,13 @@ use App\Http\Resources\User\RegisterResource;
 use App\UseCases\Params\User\CreateFirstUserParams;
 use App\Http\Resources\User\IndexCollectionResource;
 
+/**
+ * [ANÁLISE]
+ *
+ * - No Controller não deve ter nenhuma regra de negócio, nenhuma lógica.
+ *   O pattern que foi utilizado nesse teste é interessante,
+ *   mas geralmente no padrão de arquitetura MVC temos o seguinte: view -> controller -> service -> repository -> model -> banco de dados
+ */
 class UserController extends Controller
 {
     /**
@@ -98,7 +105,7 @@ class UserController extends Controller
 
         return $this->response(
             new DefaultResponse(
-                new IndexCollectionResource($response)
+                new IndexCollectionResource($response) // Vai ter um erro nesse resource, porque o __construct da classe BasePaginatorCollection tem um argumento do tipo string que vai receber null
             )
         );
     }
@@ -112,6 +119,12 @@ class UserController extends Controller
      */
     public function show(string $id): JsonResponse
     {
+        /**
+         * [ANÁLISE]
+         *
+         * - Classe show fora de padrão
+         *   De acordo com a PSR12, nome de classe deve ficar em PascalCase
+         */
         $response = (new show($id, Auth::user()->company_id))->handle();
 
         return $this->response(

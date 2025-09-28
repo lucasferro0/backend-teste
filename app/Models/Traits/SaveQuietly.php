@@ -2,7 +2,7 @@
 
 namespace App\Models\Traits;
 
-trait SaveQuietly
+trait SaveQuietly // Trait sem utilização
 {
     /**
      * Permitir que uma model seja salva sem disparar os gatilhos do observer

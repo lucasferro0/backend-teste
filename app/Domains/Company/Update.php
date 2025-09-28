@@ -4,6 +4,12 @@ namespace App\Domains\Company;
 
 use App\Domains\BaseDomain;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Se nenhuma validação é necessária, então não tem motivo para essa classe existir.
+ *   Isso prejudica desempenho e ainda deixa código morto no projeto
+ */
 class Update extends BaseDomain
 {
     /**

@@ -11,6 +11,12 @@ use Illuminate\Http\Client\PendingRequest;
 use App\Exceptions\BankingRequestException;
 use Psr\SimpleCache\InvalidArgumentException;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Toda a estrutura de Integrations poderia ser refeita para uma outra estrutura
+ *   Dessa forma, essa estrutura nova seria desenvolvida para utilizar o máximo do autocomplete do intelisense, para facilitar, pois Integration manipula muito array.
+ */
 class Gateway
 {
     use Logger;
@@ -93,6 +99,14 @@ class Gateway
 
             return $response;
         }
+
+        /**
+         * [ANÁLISE]
+         *
+         * - Reforço que não tem necessidade de gravar logs de operações de sucesso como essas.
+         *
+         * - Toda a parte de log deveria ser feita lá no Handler
+         */
 
         $this->createLog(
             description:      'Sucesso ao enviar request para a BaaS',

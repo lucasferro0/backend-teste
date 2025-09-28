@@ -86,6 +86,9 @@ class AccountProvider extends BaseProvider
      */
     public function pix(array $attributes = []): array
     {
+        // Não é recomendado deixar copia e cola real mocado no código. Pode conter dados pessoais.
+        // Nesse caso é fake, mas um real não poderia.
+
         $response = [
             'emv'                        => '2w33213213312br.gov.bcb.pix0121banking3@email.com21312323Sao PauloADDASASFJGOJDJ',
             'id'                         => fake()->uuid,

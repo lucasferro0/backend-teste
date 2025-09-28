@@ -6,6 +6,11 @@ use App\Traits\Logger;
 use App\Exceptions\PolicyException;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Como essa classe está sendo usada como classe base, deveria ser abstract
+ */
 class BasePolicy
 {
     use Logger;

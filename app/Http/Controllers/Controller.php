@@ -16,6 +16,20 @@ class Controller extends BaseController
     use AuthorizesRequests;
 
     /**
+     * [ANÁLISE]
+     *
+     * - Não é interessante realizar alterações nesse arquivo, visto que em versões posteriores do laravel, pode ocorrer mudanças.
+     *   Reforço a ideia de criar classes próprias genéricas que herdam de classes do laravel.
+     *
+     * - É interessante criar métodos para padronizar response body, dessa forma podemos reforçar o padrão.
+     *   Podemos ter métodos que reforçam o padrão do response body da api para os cenários mais comuns.
+     *
+     *   Exemplo:
+     *   $this->responseIndex($data)  --> Devolve dados com paginação sempre no mesmo padrão
+     *   $this->responseStore($data)  --> Devolve um response body como ['message' => 'Usuário registrado com sucesso', 'data' => ['id' => 1111, 'name' => 'Lucas']]
+     */
+
+    /**
      * Helper para ser usado na resposta de todas as controllers filhas
      *
      * @param  DefaultResponse $response

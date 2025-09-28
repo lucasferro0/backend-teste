@@ -5,6 +5,12 @@ namespace App\Paginators;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Não acho necessário ter um Paginator próprio.
+ *   Os Paginators que o laravel fornece, já atendem bastante às demandas.
+ */
 class Paginator extends LengthAwarePaginator
 {
     /**
@@ -28,9 +34,11 @@ class Paginator extends LengthAwarePaginator
     }
 
     /**
-     * Get the instance as an array.
+     * [ANÁLISE]
      *
-     * @return array
+     * - Essa lógica para colocar null caso o array esteja vazio pode dificultar a vida do frontend.
+     *   Pensando em um BFF, o ideal seria caso o array estivesse vazio, devolver o array vazio.
+     *   Como estamos mostrando uma lista, facilita para o frontend.
      */
     public function toArray()
     {

@@ -28,9 +28,10 @@ class Find extends Gateway
     }
 
     /**
-     * Busca os dados de conta
+     * [ANÁLISE]
      *
-     * @return void
+     * - Fora do padrão do projeto, de acordo com o padrão do Integration proposto, não é responsabilidade dele chamar um Repository
+     *   O Integration deve apenas mandar request
      */
     protected function findAccountData(): void
     {

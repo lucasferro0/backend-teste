@@ -76,7 +76,15 @@ class Register extends BaseUseCase
     }
 
     /**
-     * Registra o cartão
+     * [ANÁLISE]
+     *
+     * - Nesse método a ordem de execução correta seria checkIfCanRegister() -> store() -> register()
+     *   Digo isso, pois não há necessidade de sempre mandar request criando o cartão lá e depois tentar criar o cartão aqui,
+     *   sendo que pode ocorrer um erro depois de mandar o request ao criar o cartão no nosso banco de dados e dessa forma, o cartão ia ficar criado na api do banco
+     *
+     * - Além disso, deixando na ordem correta de execução mencionada em cima, também tem que usar controle de transações com DB::beginTransaction(),
+     *   Dessa forma, conseguimos garantir que caso a api do banco devolva um response com status code de erro e não crie o cartão lá,
+     *   nós podemos dar DB::rollBack() no cartão que criamos no nosso banco de dados.
      */
     public function handle(): array
     {
@@ -95,6 +103,6 @@ class Register extends BaseUseCase
             );
         }
 
-        return $this->card;
+        return $this->card; // Possível vulnerabilidade, visto que está devolvendo o que a api do banco devolve para a nossa api
     }
 }

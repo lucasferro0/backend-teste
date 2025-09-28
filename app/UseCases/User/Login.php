@@ -32,6 +32,12 @@ class Login extends BaseUseCase
      */
     protected function createToken(): void
     {
+        /**
+         * [ANÁLISE]
+         *
+         * - Alias para classe deixando fora do padrão recomendado na PSR12.
+         *   Nome de classe deve ficar em PascalCase
+         */
         $this->token = (new create_token($this->id))->handle();
     }
 
@@ -43,6 +49,16 @@ class Login extends BaseUseCase
         try {
             $this->createToken();
         } catch (Throwable $th) {
+            /**
+             * [ANÁLISE]
+             *
+             * - Se esse método estivesse funcionando, estaria sendo criado log caso não encontrasse o usuário na chamada (new create_token($this->id))->handle();
+             *   pois lá tem um findOrFail();
+             *
+             * - Não é interessante criar log nesses casos.
+             *
+             * - Deve criar log para coisas que realmente são erros, quando é um erro inesperado.
+             */
             $this->defaultErrorHandling(
                 $th,
                 [

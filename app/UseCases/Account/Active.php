@@ -35,6 +35,11 @@ class Active extends BaseUseCase
      */
     protected function updateDatabase(): void
     {
+        /**
+         * [ANÁLISE]
+         *
+         * - Causará um erro na constraint check pois tem um check status in ('ACTIVE', 'BLOCK') e está sendo passado active tudo minúsculo
+         */
         (new RepositoryUpdateStatus($this->userId, 'active'))->handle();
     }
 
@@ -49,7 +54,15 @@ class Active extends BaseUseCase
     }
 
     /**
-     * Ativa a conta
+     * [ANÁLISE]
+     *
+     * - Faltou ter controle de transação no banco de dados
+     *   Caso a api do banco devolva status code de erro, deve ser feito um DB::rollBack();
+     *
+     * - A conta no nosso banco de dados é buscada várias vezes nesse método
+     *   A primeira vez é buscada aqui $this->updateDatabase();
+     *   A segunda vez é buscada aqui $this->updateStatus();
+     *   Isso causa problema de performance.
      */
     public function handle(): void
     {

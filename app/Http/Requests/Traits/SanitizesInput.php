@@ -4,6 +4,11 @@ namespace App\Http\Requests\Traits;
 
 use Illuminate\Support\Arr;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Não está sendo utilizada
+ */
 trait SanitizesInput
 {
     /**

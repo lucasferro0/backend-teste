@@ -4,6 +4,14 @@ namespace App\UseCases\Params\User;
 
 use App\UseCases\Params\BaseParams;
 
+/**
+ * [ANÁLISE]
+ *
+ * - Analisando a esse pattern de Params, ele soa como o pattern de DTO/VO
+ *   Dessa forma, não faz sentido as classes de params estarem dentro do diretório UseCase.
+ *   Seguindo essa lógica, deveria ter um diretório app/Params, e lá teriam os Params do projeto.
+ */
+
 class CreateFirstUserParams extends BaseParams
 {
     /**

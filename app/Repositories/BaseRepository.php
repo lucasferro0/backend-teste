@@ -184,7 +184,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         int|null $perPage = null,
         int|null $page = null
     ): LengthAwarePaginator {
-        $perPage = $perPage ?? config('app.limit_pagination');
+        $perPage = $perPage ?? config('app.limit_pagination'); // 'app.limit_pagination' não está criado, logo, ficará o valor perPage default do laravel de 15
 
         $result = $this->builder
             ->paginate(

@@ -32,11 +32,6 @@ class Create extends BaseRepository
         parent::__construct();
     }
 
-    /**
-     * Criação de usuário
-     *
-     * @return array
-     */
     public function handle(): array
     {
         return $this->create(

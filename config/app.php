@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'UTC', // Mudaria para timezone America/Sao_Paulo
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'en', // Instalaria a lib do lucascudo para deixar as mensanges de validação em português e mudaria o locale para pt_BR
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'en_US', // Mudaria para pt_BR para usar o faker nos testes automatizados com frases e nomes em português, e com cpf e cnpj
 
     /*
     |--------------------------------------------------------------------------

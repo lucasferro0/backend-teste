@@ -13,6 +13,15 @@ return [
     |
     */
 
+    /**
+     * [ANÁLISE]
+     *
+     * - Está usando como default o guard web, que utiliza driver de session, ou seja, autenticação por sessão.
+     *   API funciona com autenticação por token, logo tem que utilizar um guard configurado com o driver do sanctum.
+     *
+     * - Guard web geralmente é utilizado quando estamos trabalho com projeto laravel monolítico
+     */
+
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
@@ -34,6 +43,12 @@ return [
     | Supported: "session"
     |
     */
+
+    /**
+     * [ANÁLISE]
+     *
+     * - Faltou criar um guard para utilizar o driver do sanctum e apontar para o provider user
+     */
 
     'guards' => [
         'web' => [
@@ -108,12 +123,21 @@ return [
 
     'password_timeout' => 10800,
 
+    /**
+     * [ANÁLISE]
+     *
+     * - O token_name deve ficar no arquivo config/sanctum.php para garantir a separação adequada de responsabilidades
+     *   O arquivo auth.php é um arquivo de contém configuração de autenticação da aplicação do laravel, gerenciamento de guards e com isso diversos tipos de autenticação.
+     *   token_name é uma característica apenas da autenticação da lib do sanctum
+     */
+
     'token_name' => env('TOKEN_NAME', 'token_name'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Integração Saas
-    |--------------------------------------------------------------------------
+    /**
+     * [ANÁLISE]
+     *
+     * - Todos os dados de banking não devem estar aqui
+     *   Esses dados poderiam ficar em um arquivo criado config/banking-service.php, por exemplo
      */
     'banking_base_url' => env('BANKING_BASE_URL', null),
     'banking_client_id' => env('BANKING_CLIENT_ID', null),

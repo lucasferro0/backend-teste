@@ -14,6 +14,13 @@ use App\Http\Resources\Account\ShowResource;
 
 class AccountController extends Controller
 {
+
+    /**
+     * [ANÁLISE]
+     *
+     * - No comentário diz que ativa a conta bancária, porém a conta é criada com status BLOCK
+     */
+
     /**
      * Ativa a conta bancária
      *

@@ -6,15 +6,22 @@ use Closure;
 use App\Traits\ResponseHelpers;
 
 /**
- * Middleware para validar políticas de acesso aos recursos,
+ * [ANÁLISE]
  *
- * Sua finalidade é fazer o autoload das regras de políticas de
- * acesso escritas para o método que está sendo acessado quando
- * a request é enviada para o nosso endpoint
+ * - Não é uma boa prática deixar esse middleware sem o sufixo Middleware
+ *
+ * - Esse tipo de gerenciamento de policies, acredito que fica mais escalável com RBAC (role-based access control) via banco de dados.
+ *   Até porque, podemos construir toda uma estrutura no banco de dados para isso ficar dinâmico e colocar também feature flags nos endpoints
+ *
+ * - Além disso, vejo que ocorreu uma confusão entre a camada de Policy e Domain na estrutura do projeto
+ *
+ * - Vai dar erro caso alguma Policy dê errado na hora de gravar o log
+ *
+ * - Não seguiu laravel conventions no pattern de Policy
  */
 class ResourcePolicies
 {
-    use ResponseHelpers;
+    use ResponseHelpers; // Herda dessa trait, porém não utiliza nenhum método
 
     private const POLICIES_NAMESPACE = 'App\Policies\App';
 

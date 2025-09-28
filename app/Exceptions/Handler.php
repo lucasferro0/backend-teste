@@ -46,6 +46,13 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        /**
+         * [ANÁLISE]
+         *
+         * - Para impedir que grave log de determina exception, não precisava sobrecrever o método report.
+         *   Bastava colocar PolicyException::class no array da variável protected $dontReport da classe Handler
+         */
+
         // Impedindo a escrita da Exception de política no arquivo
         // de log do laravel
         if ($exception instanceof PolicyException) {
@@ -56,13 +63,9 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
+     * [ANÁLISE]
      *
-     * @param  Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Throwable
+     * - Eu iria refazer todo esse tratamento no método render para devolver o response em caso de erro.
      */
     public function render($request, Throwable $exception)
     {
@@ -123,6 +126,12 @@ class Handler extends ExceptionHandler
                 'request_time' => Carbon::now()->setTimezone(config('app.timezone'))
             ];
 
+            /**
+             * [ANÁLISE]
+             *
+             * - A criação de log não deve ser feita aqui
+             *  Ela deve ser feita antes do render, no método report da classe Handler
+             */
             $this->createLog(
                 'Erro na execução da API ' . $route->methods[0] . ' ' . $route->uri,
                 'REQUEST_'
@@ -133,7 +142,7 @@ class Handler extends ExceptionHandler
             );
         }
 
-        dump($exception);
+        dump($exception); // Vulnerabilidade, não é para deixar dump(); no código
 
         $response = new DefaultResponse(
             null,

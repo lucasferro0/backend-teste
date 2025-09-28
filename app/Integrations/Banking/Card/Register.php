@@ -37,9 +37,10 @@ class Register extends Gateway
     }
 
     /**
-     * Busca os dados de conta
+     * [ANÁLISE]
      *
-     * @return void
+     * - Fora do padrão do projeto, de acordo com o padrão do Integration proposto, não é responsabilidade dele chamar um Repository
+     *   O Integration deve apenas mandar request
      */
     protected function findAccountData(): void
     {
@@ -56,9 +57,12 @@ class Register extends Gateway
     }
 
     /**
-     * Busca os dados de conta
+     * [ANÁLISE]
      *
-     * @return void
+     * - Método não utilizado findCardData() (código morto)
+     *
+     * - Fora do padrão do projeto, de acordo com o padrão do Integration proposto, não é responsabilidade dele chamar um Repository
+     *   O Integration deve apenas mandar request
      */
     protected function findCardData(): void
     {
@@ -85,9 +89,12 @@ class Register extends Gateway
     }
 
     /**
-     * Cria de uma conta
+     * [ANÁLISE]
      *
-     * @return array
+     * - O método $this->findAccountData();
+     *   Temos uma consulta apenas para pegar o external_id. Além de que a lógica dessa consulta de cartão está errada.
+     *   Deveria ser devolvido os dados do banco de dados e não os dados do response body da api do banco.
+     *   Caso fosse necessário ter algum dado da api do banco, ele poderia ser mergeado com os dados do nosso banco de dados
      */
     public function handle(): array
     {

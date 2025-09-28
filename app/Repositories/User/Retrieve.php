@@ -78,6 +78,12 @@ class Retrieve extends BaseRepository
      */
     public function handle(): LengthAwarePaginator
     {
+        /**
+         * [ANÁLISE]
+         *
+         * - Não é uma boa prática utilizar raw query
+         *   Deve ser utilizado os métodos ->where(), ->whereNull(), ->whereLike() porque eles já fazem o trabalho de proteger contra sql injection
+         */
         $this->leftJoinAccount();
 
         if ($this->name) {

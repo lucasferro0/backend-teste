@@ -31,6 +31,15 @@ class CanUseDocumentNumber extends BaseRepository
         parent::__construct();
     }
 
+
+    /**
+     * [ANÁLISE]
+     *
+     * - Repostory com responsabilidade errada, visto que está realizando uma validação.
+     *   A responsabilidade do repository é apenas de se comunicar com o banco de dados e ele não deve fazer nenhuma validação.
+     *   De acordo com o padrão do projeto, a validação de regra de negócio tem que ficar na camada de Domain
+     */
+    
     /**
      * Valida se o documento é único
      *

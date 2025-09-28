@@ -12,9 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 class ActiveTest extends TestCase
 {
     /**
-     * Teste de desbloqueio de conta
+     * [ANÁLISE]
+     * - Eu recomendaria seguir o nome do método de teste como snake_case, pois o nome do método de teste deve ser o mais descritivo possível.
+     *   Dessa forma, ficará mais legível.
      *
-     * @return void
+     * - Não é uma boa prática utilizar a factory chamando o método factory da model User::factory()
+     *   Dessa forma, perdemos a vantagem do autocomplete do intelisense, e ficamos sem saber quais métodos existem na classe.
+     *   Aí precisamos entrar na classe para saber quais existem, e isso atralha e causa uma má experiência de desenvolvimento.
      */
     public function testActive()
     {
@@ -53,7 +57,7 @@ class ActiveTest extends TestCase
             ]
         );
 
-        $response = $this->put("/api/users/$user->id/account/active", [], $headers);
+        $response = $this->put("/api/users/$user->id/account/active", [], $headers); // Poderia ter utilizado o método ->withHeaders();
 
         Http::assertSentInOrder(
             [
